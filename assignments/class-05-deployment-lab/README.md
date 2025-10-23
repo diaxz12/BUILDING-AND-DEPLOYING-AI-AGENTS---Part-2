@@ -2,7 +2,7 @@
 
 ## Overview
 
-Ship a lightweight agent that answers "How do I…?" questions about FastAPI and Streamlit by combining the Class 5 FastAPI backend, the Streamlit UI, Tavily web search, and Langfuse tracing. You will host the reasoning agent inside the FastAPI on Render, call it from the Streamlit client, and keep the deployment steps simple enough to reuse in later assignments.
+Ship a lightweight agent that answers "How do I…?" questions about FastAPI and Streamlit by combining the Class 5 FastAPI backend, the Streamlit UI, [Tavily web search](https://www.tavily.com/), and Langfuse tracing. You will host the reasoning agent inside the FastAPI on Render, call it from the Streamlit client, and keep the deployment steps simple enough to reuse in later assignments.
 
 ## Learning Goals
 
@@ -26,17 +26,16 @@ Ship a lightweight agent that answers "How do I…?" questions about FastAPI and
    - From `classes/class-05-deployment-interfaces/demos/fastapi-agent-service`, create/activate `.venv` and install requirements.
    - Add `tavily-python` to `requirements.txt` alongside any LangChain and LangGraph integrations you need.
 2. **Add the Tavily search tool.**
-   - In `main.py`, register a new LangChain tool (e.g., `tavily_fastapi_helper`) inside `build_tools()` that wraps the Tavily client.
+   - In `main.py`, register a new LangChain tool inside `build_tools()` that wraps the Tavily client.
    - Blend Tavily snippets with a concise answer so the agent explains which sources it used.
 3. **Prime the agent for the class 5 context.**
    - Update the system prompt or initial tool descriptions so the LangGraph agent emphasises deployment steps, environment setup, and debugging tips for the Class 5 demos.
    - Ensure responses mention both FastAPI API guidance and Streamlit UI pointers when relevant.
 4. **Expose locally the API with monitoring enabled.**
-   - Keep the `/chat` route contract intact; surface `source="langgraph:<model>+tavily"` whenever the search tool contributes to the answer.
-   - Update `generate_observed_reply()` so the Langfuse `@observe` payload includes Tavily metadata (query text, result URLs, etc.) alongside the reply.
+   - Keep the `/chat` route contract intact.
+   - The tavily tool calls should be visible in Langfuse.
 5. **Update the Streamlit UI.**
    - Point the UI (`classes/class-05-deployment-interfaces/demos/streamlit-chat-ui/app.py`) to your API.
-   - Surface source details in the caption (e.g., "langgraph:gpt-4o-mini + tavily") and flag when Langfuse captured the run.
 6. **Deploy the API + UI.**
    - Follow the class 5 demo `README.md` to push the FastAPI service to Render and host the Streamlit interface on the Streamlit Cloud Community. Double-check environment variables in both platforms.
 7. **Document your work.**
@@ -48,4 +47,4 @@ Ship a lightweight agent that answers "How do I…?" questions about FastAPI and
 - Share the source code of the assignment.
 - `README.md` with sample Q&A transcript(s).
 - Share the Streamlit UI URL with the working AI Agent.
-- Optional: quick video showcasing that Tavily, LangGraph, and Langfuse all ran during testing.
+- **Optional**: quick video showcasing that Tavily, LangGraph, and Langfuse all ran during testing.
