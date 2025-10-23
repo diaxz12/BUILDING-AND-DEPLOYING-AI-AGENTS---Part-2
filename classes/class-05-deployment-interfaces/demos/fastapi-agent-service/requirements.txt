@@ -6,4 +6,4 @@ langfuse>=2.33
 langgraph>=0.0.48
 langchain-openai>=0.1.10
 langchain-core>=0.1.52
-langchain
+langchain==0.3.27

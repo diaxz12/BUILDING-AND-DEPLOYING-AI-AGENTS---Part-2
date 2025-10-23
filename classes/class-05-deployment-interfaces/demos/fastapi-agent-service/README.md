@@ -92,7 +92,6 @@ A small API that powers the Streamlit demo. The entire project fits in this fold
 1. Add `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and (optionally) `LANGFUSE_HOST`/`LANGFUSE_ENVIRONMENT` to `.env`.
 2. Restart `uvicorn` and make another `/chat` request.
 3. Go to the Langfuse dashboard and confirm a trace named `fastapi.chat` appears. The trace captures the user message, final reply, and whether the agent called a tool.
-   - The app now uses Langfuse's `@observe` decorator to capture inputs/outputs automatically. If traces do not appear, double-check your Langfuse keys.
 
 ## Deploying the API to Render (free tier)
 

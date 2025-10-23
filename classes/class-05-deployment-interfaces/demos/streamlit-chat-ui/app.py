@@ -172,7 +172,7 @@ with st.sidebar:
     st.caption("Run `uvicorn main:app --reload` inside the API folder first.")
     st.caption(f"Current session: {st.session_state.session_id}")
 
-st.title("Playground: UI + API")
+st.title("Class 5 Playground")
 st.write("Type a question about deploying agents. The UI forwards it to FastAPI.")
 
 for entry in st.session_state.messages:

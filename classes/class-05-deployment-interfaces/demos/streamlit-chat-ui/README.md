@@ -66,7 +66,7 @@ A beginner-friendly front-end for the Class 5 agent API. Everything is in one fi
 
 1. Create a new GitHub repository with the following files: `app.py`, `requirements.txt` and `.env.example`.
 2. Visit https://share.streamlit.io/ and sign in with your GitHub account.
-3. Click **New app**, choose the repository and branch, and set the main file path to `app.py`.
+3. Click **Create app**, choose the repository and branch, and set the main file path to `app.py`.
 4. Under **Advanced settings**, add any secrets (for example `AGENT_API_BASE`) so the UI knows where your FastAPI service lives.
 5. Press **Deploy**. Streamlit will build the app, install packages from `requirements.txt`, and give you a public URL to share with classmates.
 6. After deployment, try the app from the public URL and verify the caption shows the correct API source and monitoring status.

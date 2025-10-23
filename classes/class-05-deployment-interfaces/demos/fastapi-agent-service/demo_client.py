@@ -10,7 +10,7 @@ import httpx
 def main():
     parser = argparse.ArgumentParser(description="Send a message to the agent API")
     parser.add_argument("message", help="Prompt for the agent")
-    parser.add_argument("--base-url", default="http://localhost:8000", help="FastAPI base URL")
+    parser.add_argument("--base-url", default="http://127.0.0.1:8000", help="FastAPI base URL")
     parser.add_argument("--session-id", default=str(uuid.uuid4()), help="Session identifier")
     parser.add_argument("--username", default=os.getenv("AGENT_API_USERNAME"), help="Login username (falls back to AGENT_API_USERNAME env var)")
     parser.add_argument("--password", default=os.getenv("AGENT_API_PASSWORD"), help="Login password (falls back to AGENT_API_PASSWORD env var)")
@@ -27,7 +27,7 @@ def main():
         token = login_res.json()["token"]
 
     payload = {"message": args.message, "session_id": args.session_id}
-    headers = {"X-Auth-Token": token}
+    headers = {"x_auth_token": token}
     response = httpx.post(f"{args.base_url}/chat", json=payload, headers=headers, timeout=20)
     response.raise_for_status()
     data = response.json()
