@@ -57,7 +57,7 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 LANGFUSE_PUBLIC = os.getenv("LANGFUSE_PUBLIC_KEY")
 LANGFUSE_SECRET = os.getenv("LANGFUSE_SECRET_KEY")
 LANGFUSE_HOST = os.getenv("LANGFUSE_HOST")
-LANGFUSE_ENV = os.getenv("LANGFUSE_ENVIRONMENT", "development")
+LANGFUSE_ENV = os.getenv("LANGFUSE_TRACING_ENVIRONMENT", "development")
 AGENT_API_USERNAME = os.getenv("AGENT_API_USERNAME")
 AGENT_API_PASSWORD = os.getenv("AGENT_API_PASSWORD")
 
@@ -172,13 +172,12 @@ def build_offline_reply(message: str) -> str:
     return "I am in offline mode. Ask about Streamlit, FastAPI, or Langfuse to see directed tips."
 
 
-def invoke_agent(message: str, trace_id: str, langfuse_client: Langfuse) -> tuple[str, str]:
+def invoke_agent(message: str, langfuse_client: Langfuse, session_id: str) -> tuple[str, str]:
     # Use the predefined session ID with trace_context
     with langfuse_client.start_as_current_span(
-        name="🤖-fastapi-agent",
-        trace_context={"trace_id": trace_id}
+        name="🤖-fastapi-agent"
     ) as span:
-        span.update_trace(input=message)
+        span.update_trace(input=message, session_id=session_id)
 
         agent_reply = run_agent(message)
 
@@ -229,7 +228,8 @@ def chat(payload: ChatRequest, username: str = Depends(verify_token)) -> ChatRes
     if not message:
         raise HTTPException(status_code=400, detail="message cannot be empty")
 
-    trace_id = Langfuse.create_trace_id()
+    # ID of the conversation
+    session_id = payload.session_id
  
     # Verify connection
     langfuse_client = get_client()
@@ -243,13 +243,13 @@ def chat(payload: ChatRequest, username: str = Depends(verify_token)) -> ChatRes
     # invoke the agent
     reply, source = invoke_agent(
         message=message,
-        trace_id=trace_id,
         langfuse_client=langfuse_client,
+        session_id=session_id
     )
 
     return ChatResponse(
         reply=reply,
         source=source,
         monitored=monitored,
-        session_id=trace_id,
+        session_id=session_id
     )

@@ -89,7 +89,7 @@ A small API that powers the Streamlit demo. The entire project fits in this fold
 
 ## Enable Langfuse monitoring
 
-1. Add `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and (optionally) `LANGFUSE_HOST`/`LANGFUSE_ENVIRONMENT` to `.env`.
+1. Add `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and (optionally) `LANGFUSE_HOST`/`LANGFUSE_TRACING_ENVIRONMENT` to `.env`.
 2. Restart `uvicorn` and make another `/chat` request.
 3. Go to the Langfuse dashboard and confirm a trace named `fastapi.chat` appears. The trace captures the user message, final reply, and whether the agent called a tool.
 
