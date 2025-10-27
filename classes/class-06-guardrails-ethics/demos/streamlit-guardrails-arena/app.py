@@ -12,8 +12,8 @@ from uuid import uuid4
 import requests
 import streamlit as st
 
-NO_GUARDRAILS_URL = "http://localhost:8000/chat"
-GUARDRAILS_URL = "http://localhost:8001/chat"
+NO_GUARDRAILS_URL = "http://127.0.0.1:8000/chat"
+GUARDRAILS_URL = "http://127.0.0.1:8001/chat"
 
 st.set_page_config(page_title="Guardrails Arena", layout="wide")
 st.title("🛒 Guardrails Arena")
