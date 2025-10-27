@@ -1,17 +1,13 @@
 """Minimal Streamlit chat UI for the no-guardrails e-commerce agent."""
-
-from __future__ import annotations
-
-import os
 import uuid
 from typing import Any
 
 import requests
 import streamlit as st
 
-DEFAULT_API_BASE = "http://localhost:8000"
+DEFAULT_API_BASE = "http://127.0.0.1:8000"
 
-st.set_page_config(page_title="Checkout Charlie (No Guardrails)", page_icon="🛍️", layout="wide")
+st.set_page_config(page_title="Checkout Charlie", page_icon="🛍️", layout="wide")
 
 if "messages" not in st.session_state:
     st.session_state.messages: list[dict[str, str]] = []
@@ -54,12 +50,9 @@ with st.sidebar:
         reset_conversation()
         st.toast("New session created", icon="🔄")
 
-    st.markdown("""⚠️ This UI talks to the unsafe agent demo. Expect oversharing, bad math, and tone of voice issues.""")
-
-st.title("Checkout Charlie – No Guardrails")
+st.title("Checkout Charlie")
 st.write(
-    "Use this chat to explore the unsafe e-commerce agent. Run `uvicorn main:app --reload` in "
-    "`ai-agent-no-guardrails` first so the API is available."
+    "Use this chat to explore the unsafe and safe e-commerce agent."
 )
 
 for entry in st.session_state.messages:
@@ -79,8 +72,6 @@ if prompt:
         else:
             reply_text = response.get("reply", "<no reply>")
             st.markdown(reply_text)
-            source = response.get("source", "unknown")
-            st.caption(f"Source: {source}")
-            if response.get("guardrail_violations"):
-                st.warning("Guardrail violations reported (unexpected in unsafe demo).", icon="⚠️")
+            if response.get("guardrails_applied"):
+                st.warning("Guardrail violations reported.", icon="⚠️")
             st.session_state.messages.append({"role": "assistant", "content": reply_text})

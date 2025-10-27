@@ -1,13 +1,5 @@
 """E-commerce agent demo with guardrails for class 6.
-
-This FastAPI service wraps a LangGraph ReAct agent but layers guardrails across five
-dimensions:
-
-1. Security & Privacy – blocks attempts to exfiltrate sensitive metadata.
-2. Response & Relevance – keeps the conversation anchored on the catalog and checkout.
-3. Tone of Voice – neutralises profanity or abusive language.
-4. Content Validation & Integrity – cross-checks prices and catalog facts before replying.
-5. Logic & Functionality – validates tool usage, discount codes, and quantity inputs.
+This FastAPI service wraps a LangGraph ReAct agent with guardrails.
 """
 
 import json
@@ -97,7 +89,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     reply: str
     session_id: str
-    guardrails_applied: str
+    guardrails_applied: Optional[str] = None
 
 app = FastAPI(
     title="Class 6 – No Guardrails Agent",
@@ -354,7 +346,7 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
-@app.post("/chat", response_model=ChatResponse)
+@app.post("/chat", response_model=ChatResponse, response_model_exclude_none=True)
 def chat(payload: ChatRequest) -> ChatResponse:
     session_id = payload.session_id or str(uuid4())
 
@@ -374,14 +366,19 @@ def chat(payload: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=503, detail="Agent unavailable. Set OPENAI_API_KEY to enable replies.")
 
     reply, guardrail_response = result
-    print("REPLY: ", guardrail_response)
-    guardrail_summary = (
-        guardrail_response
-        if isinstance(guardrail_response, str)
-        else str(guardrail_response)
-    )
-    return ChatResponse(
-        reply=reply,
-        session_id=session_id,
-        guardrails_applied=guardrail_summary,
-    )
+    guardrail_summary: Optional[str] = None
+    if isinstance(guardrail_response, str):
+        if guardrail_response and guardrail_response != "NONE":
+            guardrail_summary = guardrail_response
+    else:
+        if not getattr(guardrail_response, "passed", True):
+            guardrail_summary = str(guardrail_response)
+
+    response_payload = {
+        "reply": reply,
+        "session_id": session_id,
+    }
+    if guardrail_summary is not None:
+        response_payload["guardrails_applied"] = guardrail_summary
+    print("RESPONSE PAYLOAD: ", response_payload)
+    return ChatResponse(**response_payload)
