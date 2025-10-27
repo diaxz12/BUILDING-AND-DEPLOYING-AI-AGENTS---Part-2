@@ -23,7 +23,7 @@ Think of this lab as the first guardrail pass you would make before sharing the 
 
 ---
 
-## Part 1 — Guardrails for the Class 5 Agent
+## Guardrails for the Class 5 Agent
 
 1. **Refresh your Class 5 setup.**
    - Re-activate the `.venv` in the FastAPI demo folder and make sure the `/chat` endpoint still returns helpful answers.
@@ -34,7 +34,7 @@ Think of this lab as the first guardrail pass you would make before sharing the 
    - Leverage Guardrails AI and prebuilt guardrails to block or warn on unsafe content.
    - Document which ones you selected and what they do on a `README.md`.
 
-3. **Implement request-time guardrails.**
+3. **Implement the started guardrails.**
    - Update `classes/class-05-deployment-interfaces/demos/fastapi-agent-service/main.py` so every incoming prompt runs through your starter guardrails **before** LangGraph executes.
    - If a guardrail triggers, return a friendly JSON payload such as `{ "message": "We can’t help with that", "guardrail": "moderation" }` and skip the agent call.
    - Log guardrail decisions to Langfuse (prompt, guardrail name, action taken).
@@ -44,7 +44,7 @@ Think of this lab as the first guardrail pass you would make before sharing the 
    - When detected, respond with a short refusal that explains the policy. Example: "For safety reasons I can’t help with dark web content."
    - Make sure this guardrail runs for every request.
 
-5. **Add a simple response-time check (optional but encouraged).**
+5. **Add a reply falback if the custom guardrail is activated (optional but encouraged).**
    - After the agent drafts a reply, quickly verify it meets your policy (e.g., no dark-web hints slipped through, answer includes citations, etc.).
    - If the reply fails, replace it with a safe fallback and note that in the logs.
 
@@ -69,30 +69,10 @@ Think of this lab as the first guardrail pass you would make before sharing the 
      - How to read the logs/Streamlit panel.
      - A quick summary of your dataset results.
 
----
-
-## Part 2 — Guardrail Planning for Your Capstone
-
-10. **Pick a capstone scenario to analyze.**
-    - Choose the capstone idea you are leaning toward.
-    - Write a one-paragraph refresher in `guardrail_brainstorm.md` so future you remembers the context.
-
-11. **List the guardrails your capstone will need.**
-    - Brainstorm at least five guardrail ideas that match your capstone’s users, data, and integrations.
-    - For each guardrail, note why it is needed (problem it prevents, user it protects, or compliance reason).
-
-12. **Create a simple risk register.**
-    - In the same `guardrail_brainstorm.md`, list potential failures or attacks your capstone might face.
-    - Assign each risk a criticality label (`High`, `Medium`, `Low`) and briefly explain the impact if it slips through.
-    - Link each risk to one or more guardrails you listed so reviewers see the coverage plan.
-
-Feel free to include diagrams or tables if they help you explain the plan. The goal is clarity, not formality.
-
 ## Deliverables
 
 - Share the source code of the assignment.
 - Updated FastAPI service and Streamlit UI code with the new guardrails.
 - Prompt dataset and tests: `tests/data/guardrail_prompts.jsonl`, `tests/test_guardrails.py`, and generated `tests/guardrail_results.json`.
 - Documentation updates (`README.md` and optional `evaluation.md`) explaining setup, guardrails, and evidence.
-- `guardrail_brainstorm.md` capturing guardrail needs, risk rankings, and next steps for your capstone.
 - Optional: quick video demonstrating a blocked dark-web request.
