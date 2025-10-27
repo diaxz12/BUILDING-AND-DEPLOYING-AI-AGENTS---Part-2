@@ -374,8 +374,14 @@ def chat(payload: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=503, detail="Agent unavailable. Set OPENAI_API_KEY to enable replies.")
 
     reply, guardrail_response = result
+    print("REPLY: ", guardrail_response)
+    guardrail_summary = (
+        guardrail_response
+        if isinstance(guardrail_response, str)
+        else str(guardrail_response)
+    )
     return ChatResponse(
         reply=reply,
         session_id=session_id,
-        guardrails_applied=guardrail_response,
+        guardrails_applied=guardrail_summary,
     )
