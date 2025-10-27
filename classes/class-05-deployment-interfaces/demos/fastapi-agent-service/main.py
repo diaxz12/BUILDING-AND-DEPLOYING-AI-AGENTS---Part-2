@@ -177,7 +177,7 @@ def invoke_agent(message: str, langfuse_client: Langfuse, session_id: str) -> tu
     with langfuse_client.start_as_current_span(
         name="🤖-fastapi-agent"
     ) as span:
-        span.update_trace(input=message, session_id=session_id)
+        span.update_trace(input=message, session_id="chat_tutai_123")
 
         agent_reply = run_agent(message)
 

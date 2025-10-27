@@ -24,6 +24,7 @@ This repository is the shared workspace for the course on building, evaluating, 
 ## Repository Layout
 - `classes/` — session-by-session lecture decks, demos, and reference notes.
   - `class-05-deployment-interfaces/` — FastAPI agent service, Streamlit chat UI, and deployment checklists.
+  - `class-06-guardrails-ethics/` — guardrailed versus unguarded agents plus safety playgrounds.
 - `assignments/` — lab prompts and submission templates aligned to each class.
 - `resources/` — curated quickstarts for FastAPI, Streamlit, Guardrails AI, and Langfuse.
 
@@ -31,15 +32,21 @@ This repository is the shared workspace for the course on building, evaluating, 
 ### Class 5 — Deployment & Interfaces
 Build a FastAPI endpoint backed by a LangGraph agent, pair it with the Streamlit chat UI, and practice shipping to Render and Streamlit Community Cloud. All code lives under `classes/class-05-deployment-interfaces/`.
 
+### Class 6 — Guardrails, Ethics & Responsible AI
+Add Guardrails AI protections, safety prompts, and validation datasets to the Class 5 agent. Compare "no guardrails" and "guardrails on" demos in `classes/class-06-guardrails-ethics/`.
+
 ## Assignments
 - `assignments/class-05-deployment-lab/` — ship a Tavily-powered agent with FastAPI, Streamlit, and Langfuse tracing.
+
+- `assignments/class-06-guardrails-lab/` — layer safety checks onto the Class 5 agent and document your guardrail strategy.
 
 Each assignment folder includes its own README with deliverables, prerequisites, and upload expectations.
 
 ## Resource Library
 - `resources/fastapi/` — API quickstarts and deployment tips for FastAPI.
-- `resources/streamlit/` — Streamlit Cloud setup, component patterns, and UI guides.
+- `resources/guardrails-ai/` — starter configs and safety playbooks for Guardrails AI.
 - `resources/langfuse/` — tracing tutorials and dashboards for monitoring agent behaviour.
+- `resources/streamlit/` — Streamlit Cloud setup, component patterns, and UI guides.
 
 ---
 
