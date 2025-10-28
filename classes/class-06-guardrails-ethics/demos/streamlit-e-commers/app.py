@@ -30,7 +30,7 @@ def send_to_api(user_text: str) -> dict[str, Any]:
     }
     url = f"{st.session_state.api_base}/chat"
     try:
-        response = requests.post(url, json=payload, timeout=20)
+        response = requests.post(url, json=payload, timeout=60)
         response.raise_for_status()
         return response.json()
     except Exception as exc:  # noqa: BLE001

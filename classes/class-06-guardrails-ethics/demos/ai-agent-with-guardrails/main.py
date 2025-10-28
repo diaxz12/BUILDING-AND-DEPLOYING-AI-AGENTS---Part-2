@@ -380,5 +380,5 @@ def chat(payload: ChatRequest) -> ChatResponse:
     }
     if guardrail_summary is not None:
         response_payload["guardrails_applied"] = guardrail_summary
-    print("RESPONSE PAYLOAD: ", response_payload)
+
     return ChatResponse(**response_payload)
