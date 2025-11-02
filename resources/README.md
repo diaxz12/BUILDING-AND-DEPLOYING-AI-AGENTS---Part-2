@@ -74,6 +74,39 @@ deployment instructions that mirror Render’s hosting workflow.
 
 ---
 
+## FastMCP Building Blocks (`resources/fastmcp/`)
+These lightweight scripts show how to expose tools, prompts, and resources through Python’s `fastmcp`.
+
+### 1. Setup
+```bash
+cd resources/fastmcp
+python3 -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install fastmcp
+```
+
+### 2. Expose MCP Tools (`tools_mcp.py`)
+```bash
+python tools_mcp.py
+```
+- Launches `CalculatorServer` with an `add(a, b)` tool ready for any MCP client.
+
+### 3. Serve Prompt Templates (`prompts_mcp.py`)
+```bash
+python prompts_mcp.py
+```
+- Registers prompts such as `ask_about_topic` and `generate_code_request` that return structured `PromptMessage` payloads.
+
+### 4. Publish Resources (`resources_mcp.py`)
+```bash
+python resources_mcp.py
+```
+- Provides handles like `resource://greeting` and `data://config`, returning text or JSON for downstream agents.
+
+> Tip: Keep each script running in its own terminal so the Class 7 LangGraph demos can connect to all three MCP servers simultaneously.
+
+---
+
 ## Streamlit UI Demos (`resources/streamlit/`)
 Streamlit lets you create web apps straight from Python scripts.
 

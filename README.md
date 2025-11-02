@@ -25,6 +25,7 @@ This repository is the shared workspace for the course on building, evaluating, 
 - `classes/` — session-by-session lecture decks, demos, and reference notes.
   - `class-05-deployment-interfaces/` — FastAPI agent service, Streamlit chat UI, and deployment checklists.
   - `class-06-guardrails-ethics/` — guardrailed versus unguarded agents plus safety playgrounds.
+  - `class-07-mcp-protocol/` — MCP deep dive with an intro walkthrough, LangGraph + MCP starter, and the full travel-planner refactor.
 - `assignments/` — lab prompts and submission templates aligned to each class.
 - `resources/` — curated quickstarts for FastAPI, Streamlit, Guardrails AI, and Langfuse.
 
@@ -34,6 +35,12 @@ Build a FastAPI endpoint backed by a LangGraph agent, pair it with the Streamlit
 
 ### Class 6 — Guardrails, Ethics & Responsible AI
 Add Guardrails AI protections, safety prompts, and validation datasets to the Class 5 agent. Compare "no guardrails" and "guardrails on" demos in `classes/class-06-guardrails-ethics/`.
+
+### Class 7 — MCP Protocol & Multi-Tool Agents
+Connect LangGraph agents to real MCP tools for richer context. Explore:
+- `classes/class-07-mcp-protocol/demos/intro-mcp-walkthrough/` — minimal client showing how MCP handshakes and tool calls work.
+- `classes/class-07-mcp-protocol/demos/langgraph-agent-with-mcp/` — lightweight LangGraph ReAct agent wired to the classroom MCP servers.
+- `classes/class-07-mcp-protocol/demos/ai-agent-application/` — Streamlit + FastAPI travel planner that layers Guardrails, Langfuse, and MCP together.
 
 ## Assignments
 - `assignments/class-05-deployment-lab/` — ship a Tavily-powered agent with FastAPI, Streamlit, and Langfuse tracing.
