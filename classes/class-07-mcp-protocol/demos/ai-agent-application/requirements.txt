@@ -1,0 +1,13 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+streamlit>=1.32
+python-dotenv>=1.0
+requests>=2.31
+icalendar>=5.0
+langgraph>=0.0.48
+langchain-openai>=0.1.10
+langchain-core>=0.1.52
+langchain-mcp-adapters>=0.0.10
+mcp>=0.1.0
+guardrails-ai>=0.4.1
+langfuse>=2.33
