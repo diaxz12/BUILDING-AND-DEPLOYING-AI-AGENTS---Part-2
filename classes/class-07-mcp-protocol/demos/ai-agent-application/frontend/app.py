@@ -107,6 +107,7 @@ def require_login() -> None:
             else:
                 st.info("Logged in locally. Requests will fall back to offline tips.")
             st.session_state.authenticated = True
+            st.rerun()
         else:
             st.error("Invalid username or password.")
 
@@ -187,6 +188,7 @@ def render_planner_ui():
             "budget": int(budget),
             "preferences": preferences or "General sightseeing",
             "session_id": st.session_state.session_id,
+            "start_date": start_date.isoformat(),
         }
 
         with st.spinner("Planning your adventure..."):

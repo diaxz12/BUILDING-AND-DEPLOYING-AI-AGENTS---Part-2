@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from contextlib import AsyncExitStack, asynccontextmanager
+from datetime import date, datetime
 from dataclasses import dataclass
 from typing import Any, Optional
 
@@ -178,12 +179,21 @@ def build_trip_prompt(payload: dict[str, Any]) -> str:
     num_days = payload.get("num_days")
     budget = payload.get("budget")
     preferences = payload.get("preferences")
+    start_date = payload.get("start_date")
+
+    if isinstance(start_date, (datetime, date)):
+        start_date_text = start_date.isoformat()
+    elif start_date is None:
+        start_date_text = "Not provided"
+    else:
+        start_date_text = str(start_date)
 
     return (
         f"IMMEDIATELY create an extremely detailed and comprehensive travel itinerary:\n\n"
         f"- Destination: {destination}\n"
         f"- Duration: {num_days} days\n"
         f"- Budget: ${budget} USD total\n"
+        f"- Start date: {start_date_text}\n"
         f"- Preferences: {preferences}\n\n"
         "Do not ask questions—generate a complete itinerary now using all available MCP tools.\n"
         "Critical requirements:\n"

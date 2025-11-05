@@ -25,14 +25,6 @@ LANGGRAPH_STREAMLIT_SYSTEM_PROMPT="You are an AI assistant..."  # optional
 
 The Streamlit UI loads the same `.env` file, so you only need to set keys once.
 
-## Start the MCP Server
-
-In one terminal, start the sample MCP server tools:
-
-```bash
-python mcp-server.py
-```
-
 ## Option 1: Quick CLI Check
 
 Run the helper script to verify the agent can talk to the MCP server:

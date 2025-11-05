@@ -6,6 +6,8 @@ import os
 import uuid
 from typing import Optional
 
+from datetime import date
+
 from contextlib import nullcontext
 from pathlib import Path
 
@@ -75,6 +77,7 @@ class PlanRequest(BaseModel):
     budget: int = Field(ge=100, le=20000, description="Overall budget in USD.")
     preferences: str = Field(default="General sightseeing", description="What kind of trip you want.")
     session_id: Optional[str] = None
+    start_date: date = Field(..., description="Trip start date.")
 
 
 class PlanResponse(BaseModel):
