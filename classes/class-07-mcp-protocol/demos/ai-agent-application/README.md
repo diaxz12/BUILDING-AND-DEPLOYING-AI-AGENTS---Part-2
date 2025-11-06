@@ -49,13 +49,6 @@ cp frontend/.env.example frontend/.env
 - `backend/.env` – add your `OPENAI_API_KEY` (required), `GOOGLE_MAPS_API_KEY` (required for Google MCP), optional Langfuse keys, and backend login credentials.
 - `frontend/.env` – set the Streamlit login pair and `AGENT_API_BASE`. Point to your Render backend URL once deployed.
 
-### 5. Optional: Cache MCP Packages Locally
-If you prefer project-local installs:
-```bash
-npm install @openbnb/mcp-server-airbnb @gongrzhe/server-travelplanner-mcp
-```
-Then adjust the commands in `backend/agent.py` to point at `node_modules/.bin/...` if desired.
-
 ## Running Locally
 1. **Start the FastAPI backend**
    ```bash

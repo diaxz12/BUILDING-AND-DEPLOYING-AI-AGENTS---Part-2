@@ -16,7 +16,7 @@ from langgraph.prebuilt import create_react_agent
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-from .data import SAMPLE_ATTRACTIONS, SAMPLE_LISTINGS
+from data import SAMPLE_ATTRACTIONS, SAMPLE_LISTINGS
 
 SYSTEM_MESSAGE = (
     "You are a professional travel consultant AI that produces extremely detailed itineraries in a single response.\n"

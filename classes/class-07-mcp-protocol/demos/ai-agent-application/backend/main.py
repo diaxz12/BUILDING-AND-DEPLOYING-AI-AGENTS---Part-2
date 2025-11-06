@@ -18,8 +18,8 @@ from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 from pydantic import BaseModel, Field
 
-from .agent import AgentSettings, AgentRuntime, build_agent, build_trip_prompt
-from .guardrails import check_agent_answer, check_user_prompt
+from agent import AgentSettings, AgentRuntime, build_agent, build_trip_prompt
+from agent_guardrails import check_agent_answer, check_user_prompt
 
 # Load variables from .env during local development
 BASE_DIR = Path(__file__).resolve().parent
