@@ -85,7 +85,8 @@ cp frontend/.env.example frontend/.env
 - **Langfuse not monitoring**: Check the `.env` values and confirm `langfuse auth_check()` prints success in the backend logs.
 
 ## Deployment Notes
-- **Backend (Render or other PaaS)**: Upload the contents of `backend/`, point to `backend.main:app`, and set environment variables from `backend/.env.example` (ensure Node 18+ is available for the MCP servers). Enable persistent disk or build-time installs if you want to preinstall the MCP packages.
+- **Backend (Render)**: Upload the contents of `backend/`, point to `main:app`, and set environment variables from `backend/.env.example` (ensure Node 18+ is available for the MCP servers). Enable persistent disk or build-time installs if you want to preinstall the MCP packages.
+- **Run this command to deploy the web service**: pip install -r requirements.txt && guardrails configure --token your-guardrails-api-key --enable-remote-inferencing --disable-metrics && guardrails hub install hub://guardrails/qa_relevance_llm_eval && guardrails hub install hub://guardrails/sensitive_topics && guardrails hub install hub://guardrails/toxic_language
 - **Frontend (Streamlit Community Cloud)**: Deploy `frontend/app.py`, copy the keys from `frontend/.env.example` into Streamlit’s Secrets manager, and set `AGENT_API_BASE` to the deployed backend URL.
 - Both services must share the same login credentials so the Streamlit UI can authenticate successfully against the FastAPI API.
 
